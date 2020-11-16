@@ -1,0 +1,24 @@
+databases:
+  demo:
+    dsn: 'oracle://hr:hr@localhost:1521/orcl'
+
+metrics:
+  success:
+    type: gauge
+    description: Successes for 5 days
+
+  failures:
+    type: gauge
+    description: Failures for 5 days
+
+  notdue:
+    type: gauge
+    description: Not Dues for 5 days
+
+
+queries:
+  query1:
+    interval : 1m
+    databases: [demo]
+    metrics: [success, failures, notdue]
+    sql: SELECT success, failures, not_due AS "notdue" FROM data2 WHERE BILLING_DATE = '10-JUL-2020'

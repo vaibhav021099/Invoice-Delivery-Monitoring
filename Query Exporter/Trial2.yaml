@@ -1,0 +1,60 @@
+databases:
+  demo:
+    dsn: 'oracle://hr:hr@localhost:1521/orcl'
+
+metrics:
+  successes_usa:
+    type: gauge
+    description: Successes in US billings for 4 days
+
+  failures_usa:
+    type: gauge
+    description: Failures in US billings for 4 days
+
+  total_usa:
+    type: gauge
+    description: Total billings in US for 4 days
+
+  successes_emea:
+    type: gauge
+    description: Successes in EMEA billings for 4 days
+
+  failures_emea:
+    type: gauge
+    description: Failures in EMEA billings for 4 days
+
+  total_emea:
+    type: gauge
+    description: Total billings in EMEA for 4 days
+
+  successes_apj:
+    type: gauge
+    description: Successes in APJ billings for 4 days
+
+  failures_apj:
+    type: gauge
+    description: Failures in APJ billings for 4 days
+
+  total_apj:
+    type: gauge
+    description: Total billings in APJ for 4 days
+
+
+queries:
+  query1:
+    interval : 1m
+    databases: [demo]
+    metrics: [successes_usa, failures_usa, total_usa]
+    sql: SELECT successes AS "successes_usa", failures AS "failures_usa" , total AS "total_usa" FROM data3 WHERE BILLING_DATE = '09-JUL-2020' AND REGION = 'US'
+
+  query2:
+    interval : 1m
+    databases: [demo]
+    metrics: [successes_emea, failures_emea, total_emea]
+    sql: SELECT successes AS "successes_emea", failures AS "failures_emea" , total AS "total_emea" FROM data3 WHERE BILLING_DATE = '09-JUL-2020' AND REGION = 'EMEA'
+
+  query3:
+    interval : 1m
+    databases: [demo]
+    metrics: [successes_apj, failures_apj, total_apj]
+    sql: SELECT successes AS "successes_apj", failures AS "failures_apj" , total AS "total_apj" FROM data3 WHERE BILLING_DATE = '09-JUL-2020' AND REGION = 'APJ'

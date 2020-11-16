@@ -1,0 +1,48 @@
+databases:
+  demo:
+    dsn: 'oracle://hr:hr@localhost:1521/orcl'
+
+metrics:
+  success_usa_day0:
+    type: gauge
+    description: Successes in US billings on day 0
+
+  due_usa_day0:
+    type: gauge
+    description: Total billings in US on day 0
+
+  success_emea_day0:
+    type: gauge
+    description: Successes in EMEA billings on day 0
+
+  due_emea_day0:
+    type: gauge
+    description: Total billings in US on day 0
+
+  success_apj_day0:
+    type: gauge
+    description: Successes in APJ billings on day 0
+
+  due_apj_day0:
+    type: gauge
+    description: Total billings in US on day 0
+
+
+queries:
+  query1:
+    interval: 1m
+    databases: [demo]
+    metrics: [success_usa_day0, due_usa_day0]
+    sql: SELECT success AS "success_usa_day0", due AS "due_usa_day0" FROM invoice_delivery_monitor WHERE BILLING_DATE = '03-JUL-20' AND REGION = 'US' AND DAY = 0
+
+  query2:
+    interval: 1m
+    databases: [demo]
+    metrics: [success_emea_day0, due_emea_day0]
+    sql: SELECT success AS "success_emea_day0", due AS "due_emea_day0" FROM invoice_delivery_monitor WHERE BILLING_DATE = '03-JUL-20' AND REGION = 'EMEA' AND DAY = 0
+
+  query3:
+    interval: 1m
+    databases: [demo]
+    metrics: [success_apj_day0, due_apj_day0]
+    sql: SELECT success AS "success_apj_day0", due AS "due_apj_day0" FROM invoice_delivery_monitor WHERE BILLING_DATE = '03-JUL-20' AND REGION = 'APJ' AND DAY = 0

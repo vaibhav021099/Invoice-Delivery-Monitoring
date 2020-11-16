@@ -1,0 +1,16 @@
+databases:
+  demo:
+    dsn: 'oracle://hr:hr@localhost:1521/orcl'
+
+metrics:
+  us_success_day0:
+    type: gauge
+    description: Successful invoices generated in US on 1st July
+
+queries:
+  query1:
+    interval : 1m
+    databases: [demo]
+    metrics: [us_success_day0]
+    sql: |
+      SELECT success AS "us_success_day0" FROM invoice_delivery_monitor WHERE REGION = 'US' AND BILLING_DATE = '01-JUL-20' AND DAY = 0

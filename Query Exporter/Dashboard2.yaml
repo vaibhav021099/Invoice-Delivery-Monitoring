@@ -1,0 +1,42 @@
+databases:
+  demo:
+    dsn: 'oracle://hr:hr@localhost:1521/orcl'
+
+metrics:
+  success_usa_1jul:
+    type: gauge
+
+  due_usa_1jul:
+    type: gauge
+
+  success_usa_2jul:
+    type: gauge
+
+  due_usa_2jul:
+    type: gauge
+
+  success_usa_3jul:
+    type: gauge
+
+  due_usa_3jul:
+    type: gauge
+
+
+queries:
+  query1:
+    interval: 1m
+    databases: [demo]
+    metrics: [success_usa_1jul, due_usa_1jul]
+    sql: SELECT success AS "success_usa_1jul", due AS "due_usa_1jul" FROM invoice_delivery_monitor WHERE BILLING_DATE = '01-JUL-20' AND REGION = 'US' AND DAY = 2
+
+  query2:
+    interval: 1m
+    databases: [demo]
+    metrics: [success_usa_2jul, due_usa_2jul]
+    sql: SELECT success AS "success_usa_2jul", due AS "due_usa_2jul" FROM invoice_delivery_monitor WHERE BILLING_DATE = '02-JUL-20' AND REGION = 'US' AND DAY = 2
+
+  query3:
+    interval: 1m
+    databases: [demo]
+    metrics: [success_usa_3jul, due_usa_3jul]
+    sql: SELECT success AS "success_usa_3jul", due AS "due_usa_3jul" FROM invoice_delivery_monitor WHERE BILLING_DATE = '03-JUL-20' AND REGION = 'US' AND DAY = 2
